@@ -7,11 +7,15 @@ import random
 
 class TestBox(unittest.TestCase):
 
+    # Test setup function
     @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
     def assert_stdout(self, width, height, expected_output, mock_stdout):
+        # Draw the box to be compared against
         box.drawbox(width, height)
+        # Get the printed output from drawbox() and compare it with the specified output
         self.assertEqual(mock_stdout.getvalue(), expected_output)
 
+    # A series of tests to compare box with specified width, height against the expected output
     def test_2x2(self):
         self.assert_stdout(2, 2, '┌┐\n'
                                  '└┘\n')
@@ -37,27 +41,28 @@ class TestBox(unittest.TestCase):
                                  '|      |\n'
                                  '└ -  - ┘\n')
 
+    # A test with random width and height
     def test_random(self):
         min = 5
         max = 15
         w = random.randint(min, max)
         h = random.randint(min, max)
 
-        #Construct the expected output
-        '''1st line'''
+        # Construct the expected output
+        # 1st line
         expected_output = '┌'
         for i in range(0, w - 2):
             expected_output += ' - '
         expected_output += '┐\n'
 
-        '''middle lines'''
+        # middle lines
         for i in range(0, h - 2):
             expected_output += '|'
             for j in range(0, w - 2):
                 expected_output += '   '
             expected_output += '|\n'
 
-        '''last line'''
+        # last line
         expected_output += '└'
         for i in range(0, w - 2):
             expected_output += ' - '
