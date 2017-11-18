@@ -18,7 +18,7 @@ def drawbox(width, height):
     # draw last line
     drawline('└', ' - ', '┘', width)
 
-# Manual test
+# uncomment to run manually
 # drawbox(3, 4)
 
 
